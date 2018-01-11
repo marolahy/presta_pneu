@@ -6,6 +6,7 @@ class AdminFournisseurController extends ModuleAdminController
 	{
 		$this->table = 'supplier';
 		$this->tab = 'ftp';
+		$this->bootstrap = true;
 		$this->className = 'Supplier';
 		$this->addRowAction('edit');
 		$this->toolbar_btn = array();
@@ -35,8 +36,9 @@ class AdminFournisseurController extends ModuleAdminController
 	}
 	public function setMedia()
 	{
-		
-    	$this->addJqueryUI('ui.widget');
+    	//
+    	$this->addJquery();
+    	$this->addJqueryUI('ui.tabs');
     	parent::setMedia();
 	}
 	public function postProcess()
@@ -245,9 +247,9 @@ class AdminFournisseurController extends ModuleAdminController
 	}
 	public function renderForm()
 	{
+		$renderForm = parent::renderForm();
 		$current_object = $this->loadObject(true);
 		$name = Supplier::getNameById(Tools::getValue('id_supplier'));
-
 		$this->initToolbar();
 		$this->context->smarty->assign(
 			array(
@@ -267,10 +269,9 @@ class AdminFournisseurController extends ModuleAdminController
 			)
 		);
 		$current_object = $this->loadObject(true);
-		//$this->content .=  $this->context->smarty->createTemplate(realpath( dirname(__FILE__).'/../../views/templates/admin').'/form.tpl')->fetch();
-		$this->content .= $this->createTemplate('form.tpl')->fetch();
-		
-		return parent::renderForm();
+		$this->context->smarty->assign('form_tpl', $renderForm);
+		return $this->createTemplate('form.tpl')->fetch();
+		return $renderForm;
 	}
 	/**
 	 * get taxe 
