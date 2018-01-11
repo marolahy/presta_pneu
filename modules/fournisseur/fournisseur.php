@@ -44,6 +44,7 @@ class Fournisseur extends Module
 			`reference` VARCHAR(255),
 			`price` INT UNSIGNED DEFAULT NULL,
 			`actual_price` INT UNSIGNED DEFAULT NULL,
+			`quantity` INT default 0,
 			`id_categorie_default` INT NOT NULL,
 			`date_add` DATETIME NOT NULL,
 			`date_upd` DATETIME NOT NULL,
@@ -209,8 +210,8 @@ class Fournisseur extends Module
 		$tab = new Tab();
 		foreach (Language::getLanguages() as $language)
 			$tab->name[$language['id_lang']] = 'Gestion des fournisseurs';
-		$tab->module = 'manageprovider';
-		$tab->class_name = 'AdminManageProvider';
+		$tab->module = 'fournisseur';
+		$tab->class_name = 'AdminFournisseur';
 		$tab->id_parent = Tab::getIdFromClassName('AdminParentPreferences'); // Root tab
 		$tab->add();
 		return parent::install();

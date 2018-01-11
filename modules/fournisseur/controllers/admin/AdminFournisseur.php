@@ -11,7 +11,7 @@ class AdminFournisseurController extends ModuleAdminController
 		$this->toolbar_btn = array();
 		$this->_select = 'COUNT(DISTINCT ps.`id_product`) AS products';
 		$this->_join = 'LEFT JOIN `'._DB_PREFIX_.'product_supplier` ps ON (a.`id_supplier` = ps.`id_supplier`)';
-		$this->_where = 'AND a.id_supplier IN ( SELECT id_supplier FROM ps_supplier_managable )';
+		$this->_where = 'AND a.id_supplier IN ( SELECT id_supplier FROM '._DB_PREFIX_.'supplier )';
 		$this->_group = 'GROUP BY a.`id_supplier`';
 		$this->fieldImageSettings = array('name' => 'logo', 'dir' => 'su');
 		$this->fields_list = array(
